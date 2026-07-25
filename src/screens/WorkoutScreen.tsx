@@ -18,6 +18,11 @@ import {
     generateSquareRoot,
     generateCube,
     generateCubeRoot,
+    generateHCF,
+    generateLCM,
+    generatePercentage,
+    generateAverage,
+    generatePowers,
 } from "../generators";
 
 type Operation =
@@ -28,7 +33,12 @@ type Operation =
     | "sq"
     | "sqrt"
     | "cube"
-    | "cuberoot";
+    | "cuberoot"
+    | "hcf"
+    | "lcm"
+    | "percentage"
+    | "average"
+    | "powers";
 
 function rand(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -61,6 +71,11 @@ function generateQuestions(settings: any) {
     if (settings.squareRoots) list.push("sqrt");
     if (settings.cubes) list.push("cube");
     if (settings.cubeRoots) list.push("cuberoot");
+    if (settings.hcf) list.push("hcf");
+    if (settings.lcm) list.push("lcm");
+    if (settings.percentage) list.push("percentage");
+    if (settings.average) list.push("average");
+    if (settings.powers) list.push("powers");
 
     if (list.length === 0) list.push("+");
 
@@ -123,7 +138,20 @@ function generateQuestions(settings: any) {
                             ? 12
                             : 20
                 );
+            case "hcf":
+                return generateHCF(max);
 
+            case "lcm":
+                return generateLCM(max);
+
+            case "percentage":
+                return generatePercentage(max);
+
+            case "average":
+                return generateAverage(max);
+
+            case "powers":
+                return generatePowers(max);
             default:
                 return generateAddition(max);
         }

@@ -16,7 +16,12 @@ type Category =
     | "squares"
     | "squareRoots"
     | "cubes"
-    | "cubeRoots";
+    | "cubeRoots"
+    | "hcf"
+    | "lcm"
+    | "percentage"
+    | "average"
+    | "powers";
 
 interface Settings {
     addition: boolean;
@@ -29,6 +34,11 @@ interface Settings {
     squareRoots: boolean;
     cubes: boolean;
     cubeRoots: boolean;
+    hcf: boolean;
+    lcm: boolean;
+    percentage: boolean;
+    average: boolean;
+    powers: boolean;
 }
 
 const categories: Category[] = [
@@ -40,6 +50,11 @@ const categories: Category[] = [
     "squareRoots",
     "cubes",
     "cubeRoots",
+    "hcf",
+    "lcm",
+    "percentage",
+    "average",
+    "powers",
 ];
 
 export default function HomeScreen({ navigation }: any) {
@@ -52,6 +67,11 @@ export default function HomeScreen({ navigation }: any) {
         squareRoots: false,
         cubes: false,
         cubeRoots: false,
+        hcf: false,
+        lcm: false,
+        percentage: false,
+        average: false,
+        powers: false,
         difficulty: "Easy",
         count: 10,
     });
@@ -70,15 +90,20 @@ export default function HomeScreen({ navigation }: any) {
     }
 
     const categoryLabels: Record<Category, string> = {
-        addition: "Addition",
-        subtraction: "Subtraction",
-        multiplication: "Multiplication",
-        division: "Division",
-        squares: "Squares",
-        squareRoots: "Square Roots",
-        cubes: "Cubes",
-        cubeRoots: "Cube Roots",
-    };
+    addition: "Addition",
+    subtraction: "Subtraction",
+    multiplication: "Multiplication",
+    division: "Division",
+    squares: "Squares",
+    squareRoots: "Square Roots",
+    cubes: "Cubes",
+    cubeRoots: "Cube Roots",
+    hcf: "HCF",
+    lcm: "LCM",
+    percentage: "Percentage",
+    average: "Average",
+    powers: "Powers",
+};
 
     return (
         <ScrollView style={styles.screenBg} contentContainerStyle={styles.container}>

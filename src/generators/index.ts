@@ -1,20 +1,16 @@
-import { generateAddition } from "./addition";
-import { generateSubtraction } from "./subtraction";
-import { generateMultiplication } from "./multiplication";
-import { generateDivision } from "./division";
+export { generateAddition } from "./addition";
+export { generateSubtraction } from "./subtraction";
+export { generateMultiplication } from "./multiplication";
+export { generateDivision } from "./division";
 
-import { generateSquare } from "./squares";
-import { generateSquareRoot } from "./squareRoots";
-import { generateCube } from "./cubes";
-import { generateCubeRoot } from "./cubeRoots";
+export { generateSquare } from "./squares";
+export { generateSquareRoot } from "./squareRoots";
 
-export {
-  generateAddition,
-  generateSubtraction,
-  generateMultiplication,
-  generateDivision,
-  generateSquare,
-  generateSquareRoot,
-  generateCube,
-  generateCubeRoot,
-};
+export { generateCube } from "./cubes";
+export { generateCubeRoot } from "./cubeRoots";
+
+export { generateHCF } from "./hcf";
+export { generateLCM } from "./lcm";
+export { generatePercentage } from "./percentage";
+export { generateAverage } from "./average";
+export { generatePowers } from "./powers";  
