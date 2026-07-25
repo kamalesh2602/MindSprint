@@ -38,10 +38,13 @@ function getRange(diff: string) {
     switch (diff) {
         case "Easy":
             return 20;
+
         case "Medium":
-            return 100;
+            return 200;
+
         case "Hard":
-            return 1000;
+            return 999;
+
         default:
             return 20;
     }
@@ -76,14 +79,14 @@ function generateQuestions(settings: any) {
             case "*":
                 return generateMultiplication(
                     settings.difficulty === "Easy"
-                        ? 10
+                        ? 12
                         : settings.difficulty === "Medium"
-                            ? 20
-                            : 50
+                            ? 30
+                            : 99
                 );
 
             case "/":
-                return generateDivision();
+                return generateDivision(max);
 
             case "sq":
                 return generateSquare(
