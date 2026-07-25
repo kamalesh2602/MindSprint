@@ -6,6 +6,7 @@ import {
     StyleSheet,
     ScrollView,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { THEME } from "../constants/theme";
 
 type Category =
@@ -90,120 +91,125 @@ export default function HomeScreen({ navigation }: any) {
     }
 
     const categoryLabels: Record<Category, string> = {
-    addition: "Addition",
-    subtraction: "Subtraction",
-    multiplication: "Multiplication",
-    division: "Division",
-    squares: "Squares",
-    squareRoots: "Square Roots",
-    cubes: "Cubes",
-    cubeRoots: "Cube Roots",
-    hcf: "HCF",
-    lcm: "LCM",
-    percentage: "Percentage",
-    average: "Average",
-    powers: "Powers",
-};
+        addition: "Addition",
+        subtraction: "Subtraction",
+        multiplication: "Multiplication",
+        division: "Division",
+        squares: "Squares",
+        squareRoots: "Square Roots",
+        cubes: "Cubes",
+        cubeRoots: "Cube Roots",
+        hcf: "HCF",
+        lcm: "LCM",
+        percentage: "Percentage",
+        average: "Average",
+        powers: "Powers",
+    };
 
     return (
-        <ScrollView style={styles.screenBg} contentContainerStyle={styles.container}>
-            <Text style={styles.title}>🧠 MIND // SPRINT</Text>
-
-            <Text style={styles.heading}>// CATEGORIES</Text>
-
-            <View style={styles.wrap}>
-                {categories.map((item) => (
-                    <Pressable
-                        key={item}
-                        style={[
-                            styles.chip,
-                            settings[item] && styles.selected,
-                        ]}
-                        onPress={() => toggle(item)}
-                    >
-                        <Text
-                            style={[
-                                styles.chipText,
-                                settings[item] && styles.selectedText,
-                            ]}
-                        >
-                            {categoryLabels[item]}
-                        </Text>
-                    </Pressable>
-                ))}
-            </View>
-
-            <Text style={styles.heading}>// DIFFICULTY</Text>
-
-            <View style={styles.wrap}>
-                {(["Easy", "Medium", "Hard"] as const).map((d) => (
-                    <Pressable
-                        key={d}
-                        style={[
-                            styles.chip,
-                            settings.difficulty === d && styles.selected,
-                        ]}
-                        onPress={() =>
-                            setSettings((prev) => ({
-                                ...prev,
-                                difficulty: d,
-                            }))
-                        }
-                    >
-                        <Text
-                            style={[
-                                styles.chipText,
-                                settings.difficulty === d && styles.selectedText,
-                            ]}
-                        >
-                            {d}
-                        </Text>
-                    </Pressable>
-                ))}
-            </View>
-
-            <Text style={styles.heading}>// QUESTIONS</Text>
-
-            <View style={styles.wrap}>
-                {[10, 20, 50].map((n) => (
-                    <Pressable
-                        key={n}
-                        style={[
-                            styles.chip,
-                            settings.count === n && styles.selected,
-                        ]}
-                        onPress={() =>
-                            setSettings((prev) => ({
-                                ...prev,
-                                count: n as 10 | 20 | 50,
-                            }))
-                        }
-                    >
-                        <Text
-                            style={[
-                                styles.chipText,
-                                settings.count === n && styles.selectedText,
-                            ]}
-                        >
-                            {n}
-                        </Text>
-                    </Pressable>
-                ))}
-            </View>
-
-            <Pressable
-                style={[
-                    styles.start,
-                    !hasCategory && styles.disabledStart,
-                ]}
-                disabled={!hasCategory}
-                onPress={startWorkout}
+        <SafeAreaView style={{ flex: 1, backgroundColor: THEME.colors.background }}>
+            <ScrollView
+                style={styles.screenBg}
+                contentContainerStyle={styles.container}
             >
-                <Text style={styles.startText}>
-                    {hasCategory ? "EXECUTE PROTOCOL" : "SELECT CATEGORY"}
-                </Text>
-            </Pressable>
-        </ScrollView>
+                <Text style={styles.title}>🧠 MIND // SPRINT</Text>
+
+                <Text style={styles.heading}>// CATEGORIES</Text>
+
+                <View style={styles.wrap}>
+                    {categories.map((item) => (
+                        <Pressable
+                            key={item}
+                            style={[
+                                styles.chip,
+                                settings[item] && styles.selected,
+                            ]}
+                            onPress={() => toggle(item)}
+                        >
+                            <Text
+                                style={[
+                                    styles.chipText,
+                                    settings[item] && styles.selectedText,
+                                ]}
+                            >
+                                {categoryLabels[item]}
+                            </Text>
+                        </Pressable>
+                    ))}
+                </View>
+
+                <Text style={styles.heading}>// DIFFICULTY</Text>
+
+                <View style={styles.wrap}>
+                    {(["Easy", "Medium", "Hard"] as const).map((d) => (
+                        <Pressable
+                            key={d}
+                            style={[
+                                styles.chip,
+                                settings.difficulty === d && styles.selected,
+                            ]}
+                            onPress={() =>
+                                setSettings((prev) => ({
+                                    ...prev,
+                                    difficulty: d,
+                                }))
+                            }
+                        >
+                            <Text
+                                style={[
+                                    styles.chipText,
+                                    settings.difficulty === d && styles.selectedText,
+                                ]}
+                            >
+                                {d}
+                            </Text>
+                        </Pressable>
+                    ))}
+                </View>
+
+                <Text style={styles.heading}>// QUESTIONS</Text>
+
+                <View style={styles.wrap}>
+                    {[10, 20, 50].map((n) => (
+                        <Pressable
+                            key={n}
+                            style={[
+                                styles.chip,
+                                settings.count === n && styles.selected,
+                            ]}
+                            onPress={() =>
+                                setSettings((prev) => ({
+                                    ...prev,
+                                    count: n as 10 | 20 | 50,
+                                }))
+                            }
+                        >
+                            <Text
+                                style={[
+                                    styles.chipText,
+                                    settings.count === n && styles.selectedText,
+                                ]}
+                            >
+                                {n}
+                            </Text>
+                        </Pressable>
+                    ))}
+                </View>
+
+                <Pressable
+                    style={[
+                        styles.start,
+                        !hasCategory && styles.disabledStart,
+                    ]}
+                    disabled={!hasCategory}
+                    onPress={startWorkout}
+                >
+                    <Text style={styles.startText}>
+                        {hasCategory ? "EXECUTE PROTOCOL" : "SELECT CATEGORY"}
+                    </Text>
+                </Pressable>
+            </ScrollView>
+        </SafeAreaView>
     );
 }
 
