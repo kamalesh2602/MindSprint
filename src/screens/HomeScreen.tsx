@@ -6,6 +6,7 @@ import {
     StyleSheet,
     ScrollView,
 } from "react-native";
+import { THEME } from "../constants/theme";
 
 type Category =
     | "addition"
@@ -61,11 +62,13 @@ export default function HomeScreen({ navigation }: any) {
             [key]: !prev[key],
         }));
     }
+
     const hasCategory = categories.some((c) => settings[c]);
 
     function startWorkout() {
         navigation.navigate("Workout", { settings });
     }
+
     const categoryLabels: Record<Category, string> = {
         addition: "Addition",
         subtraction: "Subtraction",
@@ -76,11 +79,12 @@ export default function HomeScreen({ navigation }: any) {
         cubes: "Cubes",
         cubeRoots: "Cube Roots",
     };
-    return (
-        <ScrollView contentContainerStyle={styles.container}>
-            <Text style={styles.title}>🧠 MindSprint</Text>
 
-            <Text style={styles.heading}>Categories</Text>
+    return (
+        <ScrollView style={styles.screenBg} contentContainerStyle={styles.container}>
+            <Text style={styles.title}>🧠 MIND // SPRINT</Text>
+
+            <Text style={styles.heading}>// CATEGORIES</Text>
 
             <View style={styles.wrap}>
                 {categories.map((item) => (
@@ -98,15 +102,13 @@ export default function HomeScreen({ navigation }: any) {
                                 settings[item] && styles.selectedText,
                             ]}
                         >
-                            {
-                                categoryLabels[item]
-                            }
+                            {categoryLabels[item]}
                         </Text>
                     </Pressable>
                 ))}
             </View>
 
-            <Text style={styles.heading}>Difficulty</Text>
+            <Text style={styles.heading}>// DIFFICULTY</Text>
 
             <View style={styles.wrap}>
                 {(["Easy", "Medium", "Hard"] as const).map((d) => (
@@ -135,7 +137,7 @@ export default function HomeScreen({ navigation }: any) {
                 ))}
             </View>
 
-            <Text style={styles.heading}>Questions</Text>
+            <Text style={styles.heading}>// QUESTIONS</Text>
 
             <View style={styles.wrap}>
                 {[10, 20, 50].map((n) => (
@@ -167,18 +169,25 @@ export default function HomeScreen({ navigation }: any) {
             <Pressable
                 style={[
                     styles.start,
-                    !hasCategory && { backgroundColor: "#9CA3AF" },
+                    !hasCategory && styles.disabledStart,
                 ]}
                 disabled={!hasCategory}
                 onPress={startWorkout}
             >
-                <Text style={styles.startText}>Start Workout</Text>
+                <Text style={styles.startText}>
+                    {hasCategory ? "EXECUTE PROTOCOL" : "SELECT CATEGORY"}
+                </Text>
             </Pressable>
         </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
+    screenBg: {
+        flex: 1,
+        backgroundColor: THEME.colors.background,
+    },
+
     container: {
         flexGrow: 1,
         justifyContent: "center",
@@ -186,17 +195,24 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        fontSize: 34,
-        fontWeight: "700",
+        fontFamily: THEME.typography.fontFamily,
+        fontSize: 30,
         textAlign: "center",
-        marginBottom: 40,
+        marginBottom: 30,
+        color: THEME.colors.primary,
+        letterSpacing: 2,
+        textShadowColor: THEME.colors.secondary,
+        textShadowOffset: { width: 2, height: 2 },
+        textShadowRadius: 1,
     },
 
     heading: {
-        fontSize: 20,
-        fontWeight: "600",
-        marginBottom: 10,
-        marginTop: 20,
+        fontFamily: THEME.typography.fontFamily,
+        fontSize: 14,
+        marginBottom: 12,
+        marginTop: 24,
+        color: THEME.colors.accent,
+        letterSpacing: 2,
     },
 
     wrap: {
@@ -206,37 +222,48 @@ const styles = StyleSheet.create({
     },
 
     chip: {
-        borderWidth: 1,
-        borderColor: "#2563EB",
-        borderRadius: 12,
+        borderWidth: 1.5,
+        borderColor: THEME.colors.primary,
+        borderRadius: 0,
+        backgroundColor: THEME.colors.cardBg,
         paddingVertical: 10,
         paddingHorizontal: 18,
     },
 
     selected: {
-        backgroundColor: "#2563EB",
+        backgroundColor: THEME.colors.primary,
+        borderColor: THEME.colors.primary,
     },
 
     chipText: {
-        color: "#2563EB",
-        fontWeight: "600",
+        fontFamily: THEME.typography.fontFamily,
+        color: THEME.colors.primary,
+        letterSpacing: 1,
     },
 
     selectedText: {
-        color: "white",
+        color: THEME.colors.background,
     },
 
     start: {
-        marginTop: 50,
-        backgroundColor: "#2563EB",
-        padding: 16,
-        borderRadius: 12,
+        marginTop: 40,
+        backgroundColor: THEME.colors.secondary,
+        padding: 18,
+        borderRadius: 0,
+        borderWidth: 1,
+        borderColor: THEME.colors.accent,
+    },
+
+    disabledStart: {
+        backgroundColor: "#2a2b3d",
+        borderColor: "#5a5b7d",
     },
 
     startText: {
-        color: "white",
+        fontFamily: THEME.typography.fontFamily,
+        color: "#ffffff",
         textAlign: "center",
-        fontSize: 18,
-        fontWeight: "700",
+        fontSize: 16,
+        letterSpacing: 2,
     },
 });

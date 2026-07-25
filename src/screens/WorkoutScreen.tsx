@@ -3,11 +3,11 @@ import {
     View,
     Text,
     TextInput,
-    Pressable,
     StyleSheet,
     KeyboardAvoidingView,
     Platform,
 } from "react-native";
+import { THEME } from "../constants/theme";
 
 import {
     generateAddition,
@@ -204,7 +204,7 @@ export default function WorkoutScreen({ navigation, route }: any) {
 
     return (
         <KeyboardAvoidingView
-            style={{ flex: 1 }}
+            style={{ flex: 1, backgroundColor: THEME.colors.background }}
             behavior={Platform.OS === "ios" ? "padding" : undefined}
         >
             <View style={styles.container}>
@@ -220,7 +220,7 @@ export default function WorkoutScreen({ navigation, route }: any) {
                 </View>
 
                 <Text style={styles.counter}>
-                    Question {current + 1} of {questions.length}
+                    // QUESTION {current + 1} OF {questions.length}
                 </Text>
 
                 <Text style={styles.question}>
@@ -236,6 +236,8 @@ export default function WorkoutScreen({ navigation, route }: any) {
                     returnKeyType="done"
                     editable={!submitted}
                     keyboardType="numeric"
+                    placeholderTextColor="#5a5b7d"
+                    placeholder="Answer"
                     onChangeText={setAnswer}
                     onSubmitEditing={submitAnswer}
                 />
@@ -243,16 +245,16 @@ export default function WorkoutScreen({ navigation, route }: any) {
                 {submitted &&
                     (isCorrect ? (
                         <Text style={styles.correct}>
-                            ✅ Correct
+                            ✅ CORRECT
                         </Text>
                     ) : (
                         <View style={styles.feedback}>
                             <Text style={styles.wrong}>
-                                ❌ Incorrect
+                                ❌ INCORRECT
                             </Text>
 
                             <Text style={styles.feedbackText}>
-                                Correct Answer: {q.answer}
+                                CORRECT ANSWER: {q.answer}
                             </Text>
                         </View>
                     ))}
@@ -266,59 +268,73 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 24,
         justifyContent: "center",
-        backgroundColor: "#fff",
+        backgroundColor: THEME.colors.background,
     },
 
     progressBar: {
         width: "100%",
-        height: 8,
-        backgroundColor: "#E5E7EB",
-        borderRadius: 10,
+        height: 6,
+        backgroundColor: THEME.colors.cardBg,
+        borderRadius: 0,
+        borderColor: THEME.colors.primary,
+        borderWidth: 1,
         overflow: "hidden",
-        marginBottom: 18,
+        marginBottom: 20,
     },
 
     progressFill: {
         height: "100%",
-        backgroundColor: "#2563EB",
+        backgroundColor: THEME.colors.primary,
     },
 
     counter: {
+        fontFamily: THEME.typography.fontFamily,
         textAlign: "center",
-        fontSize: 18,
-        color: "#666",
+        fontSize: 14,
+        color: THEME.colors.accent,
+        letterSpacing: 2,
         marginBottom: 20,
     },
 
     question: {
+        fontFamily: THEME.typography.fontFamily,
         textAlign: "center",
-        fontSize: 42,
-        fontWeight: "700",
+        fontSize: 38,
+        color: "#ffffff",
+        letterSpacing: 2,
         marginBottom: 35,
+        textShadowColor: THEME.colors.secondary,
+        textShadowOffset: { width: 2, height: 2 },
+        textShadowRadius: 1,
     },
 
     input: {
-        borderWidth: 1,
-        borderColor: "#D1D5DB",
-        borderRadius: 12,
+        fontFamily: THEME.typography.fontFamily,
+        borderWidth: 2,
+        borderColor: THEME.colors.primary,
+        borderRadius: 0,
+        backgroundColor: THEME.colors.cardBg,
         padding: 16,
         fontSize: 28,
+        color: THEME.colors.primary,
         textAlign: "center",
         marginBottom: 25,
     },
 
     correct: {
-        color: "#16A34A",
-        fontSize: 28,
-        fontWeight: "700",
+        fontFamily: THEME.typography.fontFamily,
+        color: THEME.colors.correct,
+        fontSize: 22,
+        letterSpacing: 2,
         textAlign: "center",
         marginTop: 20,
     },
 
     wrong: {
-        color: "#DC2626",
-        fontSize: 28,
-        fontWeight: "700",
+        fontFamily: THEME.typography.fontFamily,
+        color: THEME.colors.wrong,
+        fontSize: 22,
+        letterSpacing: 2,
         textAlign: "center",
     },
 
@@ -328,8 +344,10 @@ const styles = StyleSheet.create({
     },
 
     feedbackText: {
+        fontFamily: THEME.typography.fontFamily,
         marginTop: 10,
-        fontSize: 20,
-        color: "#444",
+        fontSize: 16,
+        color: THEME.colors.accent,
+        letterSpacing: 1.5,
     },
 });
